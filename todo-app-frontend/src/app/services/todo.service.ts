@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task } from '../models/todo.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { ApiResponse } from '../models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class TodoService {
 
   getTaskById(id: string): Observable<Task> {
     // GET /api/tasks/1 - Get one specific task
-    return this.http.get<Task>(`${this.apiUrl}/${id}`);
+    return this.http.get<ApiResponse<Task>>(`${this.apiUrl}/${id}`)
+    .pipe(map(res => res.data));
   }
 
 
@@ -28,7 +30,8 @@ export class TodoService {
   createTask(task: Task): Observable<Task> {
     // POST /api/tasks - Send new task to backend
     // Backend creates it and sends back the task with _id
-    return this.http.post<Task>(this.apiUrl, task);
+    return this.http.post<ApiResponse<Task>>(this.apiUrl, task)
+    .pipe(map(res => res.data));
   }
 
 
@@ -36,13 +39,15 @@ export class TodoService {
   updateTask(id: string, task: Task): Observable<Task> {
     // PUT /api/tasks/123 - Update existing task
     // Send the updated task data to backend
-    return this.http.put<Task>(`${this.apiUrl}/${id}`, task);
+    return this.http.put<ApiResponse<Task>>(`${this.apiUrl}/${id}`, task)
+    .pipe(map(res => res.data));
   }
 
  
 
   deleteTask(id: string): Observable<any> {
     // DELETE /api/tasks/1 - Remove a task
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete<ApiResponse<Task>>(`${this.apiUrl}/${id}`)
+    .pipe(map(res => res.data));
   }
 }
