@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('models/Todo');
-const CreateTodoDto = require('dto/create-todo.dto');
-const UpdateTodoDto = require('dto/update-todo.dto');
+const Task = require('../models/todo');
+const CreateTodoDto = require('../dto/create-todo.dto');
+const UpdateTodoDto = require('../dto/update-todo.dto');
 const {
   validateCreateTodo,
   validateUpdateTodo,
   validateObjectId
-} = require('middleware/validation.middleware');
+} = require('../middleware/validation.middleware');
 const Todo = require('../models/todo');
 
 // GET all tasks
