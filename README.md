@@ -66,7 +66,6 @@ Fully responsive design ensures usability on desktops, tablets, and mobile devic
 - **Frontend:** Angular, TypeScript, Bootstrap / CSS
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB (Atlas)
-- **Optional:** Docker for containerization
 
 
 ## Setup Instructions
