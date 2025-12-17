@@ -13,18 +13,52 @@ This application allows users to **create, read, update, and delete tasks**, wit
 - [API Endpoints](#api-endpoints)
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
-- [Deployment on Google Cloud Platform (GCP)](#Deployment on Google Cloud Platform (GCP))
+- [Deployment on Google Cloud Platform (GCP)](#Deployment-on-Google-Cloud-Platform (GCP))
 
 
 ## Features
 
-- Add, edit, delete tasks
-- Track task completion
-- Task prioritization (High, Medium, Low)
-- Set task due dates
-- Sort tasks by date, priority, or creation time
-- Highlight overdue tasks
-- Responsive UI using Angular
+The Full-Stack To-Do List Application provides a comprehensive task management system with the following features:
+
+1. Add, Edit, and Delete Tasks:
+
+Users can create new tasks with a title, description, priority, and due date.
+
+Existing tasks can be updated or deleted with a simple click.
+
+2. Track Task Completion:
+
+Mark tasks as completed.
+
+Completed tasks are visually differentiated from pending tasks.
+
+3. Task Prioritization:
+
+Assign priorities to tasks: High, Medium, or Low.
+
+Priority helps users focus on the most important tasks first.
+
+4. Set Task Due Dates:
+
+Assign due dates to tasks to plan deadlines.
+
+Overdue tasks are highlighted automatically.
+
+5. Sort Tasks:
+
+Tasks can be sorted by due date, priority, or creation time.
+
+Sorting helps users manage tasks efficiently.
+
+6. Highlight Overdue Tasks:
+
+Tasks past their due date are clearly marked to catch attention.
+
+7. Responsive UI Using Angular:
+
+The frontend is built with Angular, providing a clean, user-friendly interface.
+
+Fully responsive design ensures usability on desktops, tablets, and mobile devices.
 
 
 ## Tech Stack
