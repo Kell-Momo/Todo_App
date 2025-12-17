@@ -35,7 +35,7 @@ loadTasks(){
 
   this.taskService.getAllTasks().subscribe({
     next: (tasks) => {
-      this.tasks = tasks;
+      this.tasks = Array.isArray(tasks) ? tasks : []; // ensure tasks is an array
       this.sortTasks(); // sort after loading
       this.loading = false;
     },
@@ -121,6 +121,9 @@ onTaskSubmitted(task: Task) {
 
   sortTasks() {
     // Sort tasks based on selected option
+
+     if (!Array.isArray(this.tasks)) return;
+
     if (this.sortBy === 'date') {
       // Sort by due date (soonest first)
       this.tasks.sort((a, b) => {

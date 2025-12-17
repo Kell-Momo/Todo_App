@@ -25,6 +25,9 @@ ngOnInit(): void {
   this.initializeForm();
 }
 ngOnChanges(changes: SimpleChanges): void {
+
+  if (!this.taskForm) return;
+
   if(changes['editingTask'] && this.editingTask){
     //if editingTask changed and has a value, fill the form with the task's current value
     this.taskForm.patchValue(this.editingTask);
