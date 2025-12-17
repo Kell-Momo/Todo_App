@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/api/todos', todoRoutes);
+app.use('/api/tasks', todoRoutes);
 
 // Health check route
 app.get('/', (req, res) => {
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     message: 'Todo API Server Running',
     version: '1.0.0',
     endpoints: {
-      tasks: '/api/todos'
+      tasks: '/api/tasks'
     }
   });
 });
