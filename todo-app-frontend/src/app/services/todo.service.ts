@@ -16,7 +16,8 @@ export class TodoService {
   getAllTasks(): Observable<Task[]> {
     // GET /api/tasks - Get all tasks
     // Returns an array of Tasks
-    return this.http.get<Task[]>(this.apiUrl);
+    return this.http.get<ApiResponse<Task[]>>(this.apiUrl)
+    .pipe(map(res => res.data));
   }
 
   getTaskById(id: string): Observable<Task> {
