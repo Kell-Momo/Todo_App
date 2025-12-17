@@ -1,0 +1,101 @@
+<div class="container py-5">
+  <div class="row mb-5">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">
+          <i class="bi bi-check2-square"></i>
+          My To-Do List
+        </h1>
+        <span class="badge bg-primary" *ngIf="tasks.length > 0">
+          {{ tasks.length }} Task{{ tasks.length !== 1 ? 's' : '' }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      
+      <!-- Error Alert -->
+      <div class="alert alert-danger alert-dismissible fade show" *ngIf="error" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        {{ error }}
+        <button type="button" class="btn-close" (click)="error = null"></button>
+        <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="loadTasks()">
+          Retry
+        </button>
+      </div>
+
+      <!-- Editing Notice -->
+      <div class="alert alert-warning alert-dismissible fade show" *ngIf="editingTask" role="alert">
+        <i class="bi bi-pencil-square"></i>
+        Editing: <strong>{{ editingTask.title }}</strong>
+        <button type="button" class="btn-close" (click)="cancelEdit()"></button>
+      </div>
+
+      <!-- Sort Options -->
+      <div class="mb-3 d-flex gap-2 align-items-center" *ngIf="!loading && tasks.length > 0">
+        <label class="form-label mb-0 me-2">Sort by:</label>
+        <button
+          class="btn btn-sm"
+          [class.btn-primary]="sortBy === 'date'"
+          [class.btn-outline-secondary]="sortBy !== 'date'"
+          (click)="onSortChange('date')"
+        >
+          <i class="bi bi-calendar"></i> Due Date
+        </button>
+        <button
+          class="btn btn-sm"
+          [class.btn-primary]="sortBy === 'priority'"
+          [class.btn-outline-secondary]="sortBy !== 'priority'"
+          (click)="onSortChange('priority')"
+        >
+          <i class="bi bi-exclamation-circle"></i> Priority
+        </button>
+        <button
+          class="btn btn-sm"
+          [class.btn-primary]="sortBy === 'created'"
+          [class.btn-outline-secondary]="sortBy !== 'created'"
+          (click)="onSortChange('created')"
+        >
+          <i class="bi bi-clock-history"></i> Recent
+        </button>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div class="text-center py-5" *ngIf="loading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3 text-muted">Loading tasks...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div class="text-center py-5" *ngIf="!loading && tasks.length === 0">
+        <i class="bi bi-inbox" style="font-size: 3rem; color: #ccc;"></i>
+        <p class="mt-3 text-muted">No tasks yet. Create your first task!</p>
+      </div>
+
+      <!-- Task List -->
+      <div *ngIf="!loading && tasks.length > 0">
+        <app-todo-item
+          *ngFor="let task of tasks; trackBy: trackByTaskId"
+          [task]="task"
+          (deleteTask)="onDeleteTask($event)"
+          (editTask)="onEditTask($event)"
+          (toggleComplete)="onToggleComplete($event)"
+        ></app-todo-item>
+      </div>
+    </div>
+
+    <!-- Form Sidebar -->
+    <div class="col-md-4">
+      <div class="sticky-top" style="top: 20px;">
+        <app-todo-form
+          [editingTask]="editingTask"
+          (taskSubmitted)="onTaskSubmitted($event)"
+        ></app-todo-form>
+      </div>
+    </div>
+  </div>
+</div>
